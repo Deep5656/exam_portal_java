@@ -2,8 +2,11 @@ package com.exam.service;
 
 import java.util.Set;
 
+import org.springframework.stereotype.Service;
+
 import com.exam.model.User;
 import com.exam.model.UserRole;
+
 
 public interface UserService {
     
