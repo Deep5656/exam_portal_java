@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,16 +23,22 @@ import com.exam.service.UserService;
 @RequestMapping("/user")
 @CrossOrigin("*")
 public class UserController {
-    
 
     @Autowired
     private UserService userService;
-    //creating user
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    // creating user
     @PostMapping("/")
-    public User creatUser(@RequestBody User user) throws Exception
-    {
+    public User creatUser(@RequestBody User user) throws Exception {
 
         user.setProfile("default.png");
+
+        // encoding password with bryptencoder.
+
+        user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
         Set<UserRole> roles = new HashSet<>();
 
         Role role = new Role();
@@ -43,21 +50,18 @@ public class UserController {
         userRole.setRole(role);
 
         roles.add(userRole);
-        
-        return this.userService.createUser(user,roles);
+
+        return this.userService.createUser(user, roles);
     }
 
     @GetMapping("/{username}")
-    public User getUser(@PathVariable("username") String username){
+    public User getUser(@PathVariable("username") String username) {
         return this.userService.getUser(username);
     }
 
     @DeleteMapping("{userId}")
-    public void deletUser(@PathVariable("userId")Long userId){
+    public void deletUser(@PathVariable("userId") Long userId) {
         this.userService.deleteUser(userId);
     }
-
-
-    
 
 }
