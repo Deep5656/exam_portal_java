@@ -57,7 +57,7 @@ public class CategoryController {
     //delete category
 
     @DeleteMapping("/{categoryId}")
-    public void deleteCategory(@Pathvariable("categoryId") Long categoryId){
+    public void deleteCategory(@PathVariable("categoryId") Long categoryId){
         this.categoryService.deleteCategory(categoryId);
     }
 

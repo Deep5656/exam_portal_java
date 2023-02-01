@@ -25,17 +25,7 @@ public class Quiz {
     @ManyToOne(fetch = FetchType.EAGER)
     private  Category category;
     
-    @OneToMany(mappedBy = "quiz",cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<Result>results=new ArrayList<>();
-
-    public List<Result> getResults() {
-		return results;
-	}
-
-	public void setResults(List<Result> results) {
-		this.results = results;
-	}
+    
 
 	public Set<Question> getQuestions() {
         return questions;
@@ -105,19 +95,13 @@ public class Quiz {
         this.category = category;
     }
 
+    
+
     public Quiz() {
     }
 
-    public Quiz(String title, String description, boolean active, String maxMarks, String noOfQuestions, Category category) {
-        this.title = title;
-        this.description = description;
-        this.active = active;
-        this.maxMarks = maxMarks;
-        this.noOfQuestions = noOfQuestions;
-        this.category = category;
-    }
-
-    public Quiz(long qid, String title, String description, boolean active, String maxMarks, String noOfQuestions, Category category) {
+    public Quiz(long qid, String title, String description, boolean active, String maxMarks, String noOfQuestions,
+            Category category, Set<Question> questions) {
         this.qid = qid;
         this.title = title;
         this.description = description;
@@ -125,5 +109,9 @@ public class Quiz {
         this.maxMarks = maxMarks;
         this.noOfQuestions = noOfQuestions;
         this.category = category;
+        // this.results = results;
+        this.questions = questions;
     }
+
+    
 }
