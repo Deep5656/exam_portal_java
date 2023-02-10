@@ -3,8 +3,6 @@ package com.exam.controller;
 import com.exam.config.JwtUtils;
 import com.exam.model.JwtRequest;
 import com.exam.model.JwtResponse;
-import com.exam.model.User;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
