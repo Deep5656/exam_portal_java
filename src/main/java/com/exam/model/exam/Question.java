@@ -2,6 +2,9 @@ package com.exam.model.exam;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 public class Question {
 
@@ -17,6 +20,17 @@ public class Question {
 
     private  String answer;
 
+    @Transient
+    private String givenAnswer;
+
+
+    public String getGivenAnswer() {
+        return givenAnswer;
+    }
+
+    public void setGivenAnswer(String givenAnswer) {
+        this.givenAnswer = givenAnswer;
+    }
 
     @ManyToOne(fetch = FetchType.EAGER)
     private  Quiz quiz;
@@ -92,10 +106,12 @@ public class Question {
         this.option4 = option4;
     }
 
+    // @JsonIgnore
     public String getAnswer() {
         return answer;
     }
 
+    // @JsonProperty("answer")
     public void setAnswer(String answer) {
         this.answer = answer;
     }
